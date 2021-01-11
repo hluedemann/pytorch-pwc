@@ -317,12 +317,14 @@ if __name__ == '__main__':
 	tenSecond = torch.FloatTensor(numpy.ascontiguousarray(numpy.array(PIL.Image.open(arguments_strSecond))[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0)))
 
 	tenOutput = estimate(tenFirst, tenSecond)
+        
+        numpy.save(arguments_strOut, tenOutput.numpy().transpose(1, 2, 0))
 
-	objOutput = open(arguments_strOut, 'wb')
+	#objOutput = open(arguments_strOut, 'wb')
 
-	numpy.array([ 80, 73, 69, 72 ], numpy.uint8).tofile(objOutput)
-	numpy.array([ tenOutput.shape[2], tenOutput.shape[1] ], numpy.int32).tofile(objOutput)
-	numpy.array(tenOutput.numpy().transpose(1, 2, 0), numpy.float32).tofile(objOutput)
+	#numpy.array([ 80, 73, 69, 72 ], numpy.uint8).tofile(objOutput)
+	#numpy.array([ tenOutput.shape[2], tenOutput.shape[1] ], numpy.int32).tofile(objOutput)
+	#numpy.array(tenOutput.numpy().transpose(1, 2, 0), numpy.float32).tofile(objOutput)
 
-	objOutput.close()
+	#objOutput.close()
 # end
